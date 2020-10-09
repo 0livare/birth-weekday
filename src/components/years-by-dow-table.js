@@ -40,16 +40,14 @@ function YearsTableData({years}) {
 }
 
 function findFutureDowsForDate(month, day, yearsIntoTheFuture) {
-  let currentYear = new Date().getFullYear()
+  let thisYear = DateTime.local().set({month, day})
 
-  let dows = []
-  for (let i = 0; i <= yearsIntoTheFuture; ++i) {
-    let yearForDow = currentYear + i
-    var dt = DateTime.local(yearForDow, month, day)
-    dows.push([dt.weekdayLong, yearForDow])
-  }
-
-  return dows
+  return Array(yearsIntoTheFuture + 1) // +1 for the current year
+    .fill(null)
+    .map((_, i) => {
+      let futureYear = thisYear.plus({years: i})
+      return [futureYear.weekdayLong, futureYear.year]
+    })
 }
 
 function sortYearsByDow(futureDowsForDate) {
