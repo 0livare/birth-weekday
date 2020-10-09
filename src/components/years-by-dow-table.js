@@ -1,11 +1,11 @@
 import React from 'react'
 import cs from 'classnames'
 import {DateTime, Info} from 'luxon'
-import chroma from 'chroma-js'
 
+import {YearsTableData} from './years-table-data'
 import classes from './years-by-dow-table.module.scss'
 
-const YEARS_INTO_THE_FUTURE = 20
+export const YEARS_INTO_THE_FUTURE = 20
 
 export function YearsByDowTable({month, day, className}) {
   if (!month || !day) return null
@@ -38,29 +38,6 @@ export function YearsByDowTable({month, day, className}) {
   )
 }
 
-function YearsTableData({years}) {
-  let thisYear = DateTime.local().year
-  let maxYear = thisYear + YEARS_INTO_THE_FUTURE
-
-  let primary = getCssVariable('primary')
-  let bg = getCssVariable('bg')
-  let scale = chroma
-    .scale(['#1565c0', 'rgb(241, 241, 241)'])
-    .domain([thisYear, maxYear])
-
-  return (
-    <td>
-      {years &&
-        years.map((year, i) => (
-          <span key={year} style={{color: scale(year)}}>
-            {year}
-            {years.length > i + 1 ? ', ' : ''}
-          </span>
-        ))}
-    </td>
-  )
-}
-
 function findFutureDowsForDate(month, day, yearsIntoTheFuture) {
   let bdayThisYear = DateTime.local().set({month, day})
 
@@ -83,10 +60,4 @@ function sortYearsByDow(futureDowsForDate) {
   }
 
   return obj
-}
-
-function getCssVariable(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(
-    '--' + name,
-  )
 }

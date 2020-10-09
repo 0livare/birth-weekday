@@ -12,7 +12,7 @@ export default function Home() {
   const dayInputRef = useRef()
 
   useEffect(() => {
-    if (month.length < 2) {
+    if (month.length < 2 && !day.length) {
       monthInputRef.current.focus()
     } else if (day.length < 2) {
       dayInputRef.current.focus()
