@@ -25,8 +25,8 @@ export function SunMoonIcon({showSun, ...rest}) {
 
   return (
     <animated.svg
-      width='100'
-      height='100'
+      width='20'
+      height='20'
       viewBox={`0 0 ${size} ${size}`}
       style={rotationSpring}
       {...rest}

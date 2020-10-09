@@ -16,7 +16,7 @@ export function YearsTableData({years}) {
   }
 
   let scaleColor = chroma
-    .scale([getCssVariable('primary'), chroma(getCssVariable('bg')).darken()])
+    .scale([getCssVariable('primary'), getCssVariable('off-bg')])
     .domain([thisYear, maxYear])
 
   return (
