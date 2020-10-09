@@ -1,34 +1,52 @@
 import React from 'react'
+import {useSpring, animated} from 'react-spring'
 
 export function SunMoonIcon({showSun, ...rest}) {
   const size = 18
 
+  const rotationSpring = useSpring({
+    transform: `rotate(${showSun ? 90 : 40}deg)`,
+    from: {transform: `rotate(${showSun ? 40 : 90}deg)`},
+  })
+
+  const maskRadiusSpring = useSpring({
+    cx: showSun ? 25 : 10,
+    cy: showSun ? 0 : 2,
+    from: {
+      cx: showSun ? 10 : 25,
+      cy: showSun ? 2 : 0,
+    },
+  })
+
+  const planetRadiusSpring = useSpring({
+    r: showSun ? 8 : 5,
+    to: {r: showSun ? 5 : 8},
+  })
+
   return (
-    <svg
+    <animated.svg
       width='100'
       height='100'
       viewBox={`0 0 ${size} ${size}`}
-      style={{
-        transform: `rotate(${showSun ? 90 : 40}deg)`,
-      }}
+      style={rotationSpring}
       {...rest}
     >
       <mask id='moon-mask'>
         <rect x='0' y='0' width={size} height={size} fill='white'></rect>
-        <circle
-          cx={showSun ? 25 : 10}
-          cy={showSun ? 0 : 2}
+        <animated.circle
+          cx={maskRadiusSpring.cx}
+          cy={maskRadiusSpring.cy}
           r='8'
           fill='black'
-        ></circle>
+        ></animated.circle>
       </mask>
-      <circle
+      <animated.circle
         cx='9'
         cy='9'
         fill='currentColor'
         mask='url(#moon-mask)'
-        r={showSun ? 5 : 8}
-      ></circle>
+        r={planetRadiusSpring.r}
+      ></animated.circle>
       <g>
         {Array(6)
           .fill(null)
@@ -41,11 +59,16 @@ export function SunMoonIcon({showSun, ...rest}) {
             />
           ))}
       </g>
-    </svg>
+    </animated.svg>
   )
 }
 
 function SunRay({isOpen, theta, size}) {
+  const spring = useSpring({
+    from: {transform: 'scale(0)'},
+    to: {transform: `scale(${isOpen ? 1 : 0})`},
+  })
+
   const rayRadius = 1.5
   const rFromCenter = size / 2 - rayRadius
 
@@ -58,16 +81,16 @@ function SunRay({isOpen, theta, size}) {
   const cy = y + size / 2
 
   return (
-    <circle
+    <animated.circle
       cx={cx}
       cy={cy}
       r={rayRadius}
       fill='currentColor'
       style={{
         transformOrigin: 'center center',
-        transform: `scale(${isOpen ? 1 : 0})`,
+        ...spring,
       }}
-    ></circle>
+    ></animated.circle>
   )
 }
 
