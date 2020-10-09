@@ -4,7 +4,7 @@ import {DateTime, Info} from 'luxon'
 
 import classes from './years-by-dow-table.module.scss'
 
-const YEARS_INTO_THE_FUTURE = 10
+const YEARS_INTO_THE_FUTURE = 20
 
 export function YearsByDowTable({month, day, className}) {
   if (!month || !day) return null
@@ -36,17 +36,37 @@ export function YearsByDowTable({month, day, className}) {
 }
 
 function YearsTableData({years}) {
-  return <td>{years && years.length ? years.join(', ') : null}</td>
+  let thisYear = DateTime.local().year
+  let multiplier = 0.1
+
+  function getFontSize(year) {
+    let yearsInFuture = year - thisYear
+    let fontSize = 2 - yearsInFuture * multiplier
+    let bounded = Math.max(0.5, fontSize)
+    return bounded + 'em'
+  }
+
+  return (
+    <td>
+      {years &&
+        years.map((year, i) => (
+          <span key={year} style={{fontSize: getFontSize(year)}}>
+            {year}
+            {years.length > i + 1 ? ', ' : ''}
+          </span>
+        ))}
+    </td>
+  )
 }
 
 function findFutureDowsForDate(month, day, yearsIntoTheFuture) {
-  let thisYear = DateTime.local().set({month, day})
+  let bdayThisYear = DateTime.local().set({month, day})
 
   return Array(yearsIntoTheFuture + 1) // +1 for the current year
     .fill(null)
     .map((_, i) => {
-      let futureYear = thisYear.plus({years: i})
-      return [futureYear.weekdayLong, futureYear.year]
+      let futureBday = bdayThisYear.plus({years: i})
+      return [futureBday.weekdayLong, futureBday.year]
     })
 }
 
