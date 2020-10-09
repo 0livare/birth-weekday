@@ -1,0 +1,39 @@
+@use '../theme';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  width: 4em;
+  margin: 1em;
+}
+
+.inputWrapper {
+  border: 1px solid theme.$gray-light;
+  border-radius: 8px;
+
+  &:focus-within {
+    // border-width: 2px;
+    // padding: calc(1em - 2px);
+    box-shadow: 4px 4px 0.5em rgba(white, 0.1);
+    transform: scale(1.025);
+  }
+}
+
+.input {
+  background: none;
+  color: theme.$gray;
+  outline: none;
+  font-size: inherit;
+  border: none;
+  padding: 1em;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.label {
+  color: theme.$gray;
+  font-size: 0.5em;
+  margin-top: 1em;
+}

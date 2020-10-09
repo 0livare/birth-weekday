@@ -1,0 +1,33 @@
+@use '../theme';
+
+.root {
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: auto;
+
+  &,
+  th,
+  td {
+    border: 1px solid theme.$primary;
+  }
+
+  th,
+  td {
+    padding: 1em;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  th {
+    font-weight: normal;
+    &:nth-child(6),
+    &:nth-child(7) {
+      font-weight: bold;
+    }
+  }
+}
