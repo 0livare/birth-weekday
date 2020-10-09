@@ -1,6 +1,7 @@
 import React from 'react'
 import cs from 'classnames'
 import {DateTime, Info} from 'luxon'
+import chroma from 'chroma-js'
 
 import classes from './years-by-dow-table.module.scss'
 
@@ -24,12 +25,14 @@ export function YearsByDowTable({month, day, className}) {
   return (
     <div className={cs(classes.root, className)}>
       <table className={classes.table}>
-        {Info.weekdays().map(dow => (
-          <tr key={dow}>
-            <th>{dow}</th>
-            <YearsTableData years={yearsByDow[dow]} />
-          </tr>
-        ))}
+        <tbody>
+          {Info.weekdays().map(dow => (
+            <tr key={dow}>
+              <th>{dow}</th>
+              <YearsTableData years={yearsByDow[dow]} />
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   )
@@ -37,20 +40,19 @@ export function YearsByDowTable({month, day, className}) {
 
 function YearsTableData({years}) {
   let thisYear = DateTime.local().year
-  let multiplier = 0.1
+  let maxYear = thisYear + YEARS_INTO_THE_FUTURE
 
-  function getFontSize(year) {
-    let yearsInFuture = year - thisYear
-    let fontSize = 2 - yearsInFuture * multiplier
-    let bounded = Math.max(0.5, fontSize)
-    return bounded + 'em'
-  }
+  let primary = getCssVariable('primary')
+  let bg = getCssVariable('bg')
+  let scale = chroma
+    .scale(['#1565c0', 'rgb(241, 241, 241)'])
+    .domain([thisYear, maxYear])
 
   return (
     <td>
       {years &&
         years.map((year, i) => (
-          <span key={year} style={{fontSize: getFontSize(year)}}>
+          <span key={year} style={{color: scale(year)}}>
             {year}
             {years.length > i + 1 ? ', ' : ''}
           </span>
@@ -81,4 +83,10 @@ function sortYearsByDow(futureDowsForDate) {
   }
 
   return obj
+}
+
+function getCssVariable(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(
+    '--' + name,
+  )
 }
