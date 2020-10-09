@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import Head from 'next/head'
 
-import {BirthTextField, YearsByDowTable} from '@/components'
+import {BirthTextField, YearsByDowTable, ThemeToggle} from '@/components'
 import classes from './index.module.scss'
 
 export default function Home() {
@@ -24,6 +24,7 @@ export default function Home() {
       <Head>
         <title>Birth Weekday</title>
       </Head>
+      <ThemeToggle />
       <h1 className={classes.title}>What day is your birthday on?</h1>
       <div>
         <div className={classes.birthdayEntry}>
