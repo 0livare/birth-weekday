@@ -1,28 +1,30 @@
 import React, {useEffect, useState} from 'react'
 import cs from 'classnames'
+import {useRecoilState} from 'recoil'
 
+import {isLightThemeState} from '../../state'
 import {SunMoonIcon} from './sun-moon-icon'
 import classes from './theme-toggle.module.scss'
 
 export function ThemeToggle({className, ...rest}) {
-  const [showLightTheme, setShowLightTheme] = useState(true)
+  const [isLightTheme, setIsLightTheme] = useRecoilState(isLightThemeState)
 
   useEffect(() => {
-    if (showLightTheme) return
+    if (isLightTheme) return
 
     let html = document.documentElement
     html.classList.add('dark-theme')
     return () => html.classList.remove('dark-theme')
-  }, [showLightTheme])
+  }, [isLightTheme])
 
   return (
     <SunMoonIcon
       {...rest}
       className={cs(className, classes.themeToggle, {
-        [classes.dark]: !showLightTheme,
+        [classes.dark]: !isLightTheme,
       })}
-      showSun={showLightTheme}
-      onClick={() => setShowLightTheme(light => !light)}
+      showSun={isLightTheme}
+      onClick={() => setIsLightTheme(light => !light)}
     />
   )
 }
