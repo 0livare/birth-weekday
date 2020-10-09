@@ -33,6 +33,7 @@ export default function Home() {
             onTextChange={setMonth}
             label='Month'
             inputRef={monthInputRef}
+            placeholder='10'
           />
           <BirthTextField
             id='day'
@@ -40,6 +41,7 @@ export default function Home() {
             onTextChange={setDay}
             label='Day'
             inputRef={dayInputRef}
+            placeholder='31'
           />
         </div>
 

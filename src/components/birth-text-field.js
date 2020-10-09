@@ -2,7 +2,14 @@ import React from 'react'
 
 import classes from './birth-text-field.module.scss'
 
-export function BirthTextField({text, onTextChange, id, label, inputRef}) {
+export function BirthTextField({
+  text,
+  onTextChange,
+  id,
+  label,
+  inputRef,
+  placeholder,
+}) {
   return (
     <div className={classes.root}>
       <div className={classes.inputWrapper}>
@@ -13,6 +20,7 @@ export function BirthTextField({text, onTextChange, id, label, inputRef}) {
           value={text}
           onChange={e => onTextChange(e.target.value)}
           ref={inputRef}
+          placeholder={placeholder}
         />
       </div>
 
