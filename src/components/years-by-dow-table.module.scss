@@ -1,4 +1,4 @@
-@use '../theme';
+@use '../styles/theme';
 
 .root {
   overflow-x: scroll;
@@ -13,7 +13,7 @@
   &,
   th,
   td {
-    border: 1px solid theme.$primary;
+    border: 1px solid theme.$gray;
   }
 
   th,

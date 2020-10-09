@@ -1,0 +1,17 @@
+:root {
+  --base: black;
+  --primary: #1565c0;
+  --bg: rgb(241, 241, 241);
+  --gray: #{rgba(black, 0.5)};
+  --gray-light: #{rgba(black, 0.25)};
+  --gray-light-2: #{rgba(black, 0.2)};
+}
+
+.dark-theme {
+  --base: white;
+  --primary: #f44336;
+  --bg: rgb(24, 24, 24);
+  --gray: #{rgba(white, 0.5)};
+  --gray-light: #{rgba(white, 0.25)};
+  --gray-light-2: #{rgba(white, 0.1)};
+}

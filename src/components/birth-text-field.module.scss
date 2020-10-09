@@ -1,4 +1,4 @@
-@use '../theme';
+@use '../styles/theme';
 
 .root {
   display: flex;
@@ -14,14 +14,14 @@
   &:focus-within {
     // border-width: 2px;
     // padding: calc(1em - 2px);
-    box-shadow: 4px 4px 0.5em rgba(white, 0.1);
+    box-shadow: 4px 4px 0.5em theme.$gray-light-2;
     transform: scale(1.025);
   }
 }
 
 .input {
   background: none;
-  color: white;
+  color: theme.$base;
   outline: none;
   font-size: inherit;
   border: none;
