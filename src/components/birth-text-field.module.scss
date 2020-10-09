@@ -12,8 +12,6 @@
   border-radius: 8px;
 
   &:focus-within {
-    // border-width: 2px;
-    // padding: calc(1em - 2px);
     box-shadow: 4px 4px 0.5em theme.$gray-light-2;
     transform: scale(1.025);
   }
@@ -29,6 +27,10 @@
   width: 100%;
   height: 100%;
   text-align: center;
+
+  &::placeholder {
+    color: theme.$gray-light-2;
+  }
 }
 
 .label {

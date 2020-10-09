@@ -1,0 +1,13 @@
+@use '../../styles/theme';
+
+.themeToggle {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1em;
+  color: goldenrod;
+
+  &.dark {
+    color: theme.$gray;
+  }
+}

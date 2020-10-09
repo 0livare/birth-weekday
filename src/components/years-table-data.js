@@ -1,10 +1,22 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {DateTime} from 'luxon'
 import chroma from 'chroma-js'
+import {useRecoilState} from 'recoil'
 
+import {isLightThemeState} from '../state'
 import {YEARS_INTO_THE_FUTURE} from './years-by-dow-table'
 
 export function YearsTableData({years}) {
+  const [isLightTheme] = useRecoilState(isLightThemeState)
+  const [colorScale, setColorScale] = useState({start: 'white', end: 'black'})
+
+  useEffect(() => {
+    setColorScale({
+      start: getCssVariable('primary'),
+      end: getCssVariable('off-bg'),
+    })
+  }, [isLightTheme])
+
   let thisYear = DateTime.local().year
   let maxYear = thisYear + YEARS_INTO_THE_FUTURE
 
@@ -16,7 +28,7 @@ export function YearsTableData({years}) {
   }
 
   let scaleColor = chroma
-    .scale([getCssVariable('primary'), chroma(getCssVariable('bg')).darken()])
+    .scale([colorScale.start, colorScale.end])
     .domain([thisYear, maxYear])
 
   return (
