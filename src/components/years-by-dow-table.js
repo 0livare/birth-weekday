@@ -1,11 +1,12 @@
 import React from 'react'
+import cs from 'classnames'
 import {DateTime, Info} from 'luxon'
 
 import classes from './years-by-dow-table.module.scss'
 
 const YEARS_INTO_THE_FUTURE = 10
 
-export function YearsByDowTable({month, day}) {
+export function YearsByDowTable({month, day, className}) {
   if (!month || !day) return null
 
   let intMonth = parseInt(month)
@@ -21,26 +22,14 @@ export function YearsByDowTable({month, day}) {
   let yearsByDow = sortYearsByDow(futureDowsForDate)
 
   return (
-    <div className={classes.root}>
+    <div className={cs(classes.root, className)}>
       <table className={classes.table}>
-        <thead>
-          <tr>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-            <th>Sunday</th>
+        {Info.weekdays().map(dow => (
+          <tr key={dow}>
+            <th>{dow}</th>
+            <YearsTableData years={yearsByDow[dow]} />
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {Info.weekdays().map(dow => (
-              <YearsTableData key={dow} years={yearsByDow[dow]} />
-            ))}
-          </tr>
-        </tbody>
+        ))}
       </table>
     </div>
   )

@@ -24,7 +24,7 @@ export default function Home() {
       <Head>
         <title>Birth Weekday</title>
       </Head>
-      <h1>What day is your birthday on?</h1>
+      <h1 className={classes.title}>What day is your birthday on?</h1>
       <div>
         <div className={classes.birthdayEntry}>
           <BirthTextField
@@ -43,7 +43,7 @@ export default function Home() {
           />
         </div>
 
-        <YearsByDowTable month={month} day={day} />
+        <YearsByDowTable month={month} day={day} className={classes.table} />
       </div>
     </div>
   )
