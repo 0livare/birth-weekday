@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
+import {DateTime, Info} from 'luxon'
 
 import classes from './years-by-dow-table.module.scss'
 
@@ -35,11 +36,9 @@ export function YearsByDowTable({month, day}) {
         </thead>
         <tbody>
           <tr>
-            {Array(DAYS_IN_WEEK)
-              .fill(null)
-              .map((_, dow) => (
-                <YearsTableData years={yearsByDow[dow]} />
-              ))}
+            {Info.weekdays().map(dow => (
+              <YearsTableData key={dow} years={yearsByDow[dow]} />
+            ))}
           </tr>
         </tbody>
       </table>
@@ -48,10 +47,8 @@ export function YearsByDowTable({month, day}) {
 }
 
 function YearsTableData({years}) {
-  return <td>{years && years.length && years.join(', ')}</td>
+  return <td>{years && years.length ? years.join(', ') : null}</td>
 }
-
-const DAYS_IN_WEEK = 7
 
 function findFutureDowsForDate(month, day, yearsIntoTheFuture) {
   let currentYear = new Date().getFullYear()
@@ -59,32 +56,22 @@ function findFutureDowsForDate(month, day, yearsIntoTheFuture) {
   let dows = []
   for (let i = 0; i <= yearsIntoTheFuture; ++i) {
     let yearForDow = currentYear + i
-    let date = new Date(yearForDow, month, day)
-
-    let startsOnSunday = date.getDay()
-    let startsOnMonday = (startsOnSunday - 1 + DAYS_IN_WEEK) % DAYS_IN_WEEK
-
-    console.log(yearForDow, startsOnMonday, indexToDow[startsOnMonday])
-    dows.push([startsOnMonday, yearForDow])
+    var dt = DateTime.local(yearForDow, month, day)
+    dows.push([dt.weekdayLong, yearForDow])
   }
 
   return dows
 }
 
 function sortYearsByDow(futureDowsForDate) {
-  return futureDowsForDate.reduce((accum, [dow, year]) => {
-    if (!accum[dow]) accum[dow] = []
-    accum[dow].push(year)
+  let obj = Info.weekdays().reduce((accum, weekday) => {
+    accum[weekday] = []
     return accum
   }, {})
-}
 
-let indexToDow = [
-  'monday',
-  'tuesday',
-  'wednesday',
-  'thursday',
-  'friday',
-  'saturday',
-  'sunday',
-]
+  for (let [dow, year] of futureDowsForDate) {
+    obj[dow].push(year)
+  }
+
+  return obj
+}

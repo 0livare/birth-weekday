@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "start": "next dev",
-    "build": "next build",
-    "prod": "next start"
+    "build": "next build && next export"
   },
   "dependencies": {
+    "luxon": "^1.25.0",
     "next": "9.5.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
