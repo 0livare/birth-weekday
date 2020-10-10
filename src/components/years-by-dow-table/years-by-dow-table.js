@@ -39,12 +39,16 @@ export function YearsByDowTable({month, day, className}) {
 }
 
 function findFutureDowsForDate(month, day, yearsIntoTheFuture) {
-  let bdayThisYear = DateTime.local().set({month, day})
+  let now = DateTime.local()
+  let bdayThisYear = now.set({month, day})
+
+  let alreadyHadBdayThisYear = bdayThisYear < now
+  let skipThisYearAdjustment = alreadyHadBdayThisYear ? 1 : 0
 
   return Array(yearsIntoTheFuture + 1) // +1 for the current year
     .fill(null)
     .map((_, i) => {
-      let futureBday = bdayThisYear.plus({years: i})
+      let futureBday = bdayThisYear.plus({years: i + skipThisYearAdjustment})
       return [futureBday.weekdayLong, futureBday.year]
     })
 }

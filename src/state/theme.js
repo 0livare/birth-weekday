@@ -1,6 +1,6 @@
-import {atom} from 'recoil'
+import {atom, useRecoilTransactionObserver_UNSTABLE} from 'recoil'
 
 export const isLightThemeState = atom({
-  key: 'theme',
+  key: 'isLightTheme',
   default: true,
 })
