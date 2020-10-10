@@ -4,7 +4,7 @@ export function useQueryParams(queryParamName) {
   const router = useRouter()
 
   function setQueryParam(newQueryParamValue) {
-    router.push({
+    router.replace({
       pathname: router.basePath,
       query: {
         ...router.query,
