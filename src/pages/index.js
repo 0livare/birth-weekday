@@ -1,12 +1,13 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import Head from 'next/head'
 
 import {BirthTextField, YearsByDowTable, ThemeToggle} from '@/components'
+import {useQueryParams} from '@/hooks'
 import classes from './index.module.scss'
 
 export default function Home() {
-  const [month, setMonth] = useState('')
-  const [day, setDay] = useState('')
+  const [month, setMonth] = useQueryParams('m')
+  const [day, setDay] = useQueryParams('d')
 
   const monthInputRef = useRef()
   const dayInputRef = useRef()
