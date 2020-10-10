@@ -16,9 +16,11 @@ $margin: 2em;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  column-gap: 4em;
-  row-gap: 2em;
   margin: $margin 0;
+
+  > *:not(:last-child) {
+    margin-right: 2em;
+  }
 }
 
 .table {
