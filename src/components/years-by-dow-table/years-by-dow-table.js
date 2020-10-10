@@ -12,7 +12,7 @@ export function YearsByDowTable({month, day, className}) {
 
   let intMonth = parseInt(month)
   let intDay = parseInt(day)
-  if (!intMonth || !intDay) return null
+  if (!intMonth || !intDay || intMonth > 12 || intDay > 31) return null
 
   let futureDowsForDate = findFutureDowsForDate(
     intMonth,
