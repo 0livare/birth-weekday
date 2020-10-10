@@ -4,6 +4,7 @@ import {DateTime, Info} from 'luxon'
 
 import {YearsTableData} from './years-table-data'
 import classes from './years-by-dow-table.module.scss'
+import {YearsTableDescription} from './years-table-description'
 
 export const YEARS_INTO_THE_FUTURE = 20
 
@@ -17,13 +18,18 @@ export function YearsByDowTable({month, day, className}) {
   let futureDowsForDate = findFutureDowsForDate(
     intMonth,
     intDay,
-    YEARS_INTO_THE_FUTURE,
+    YEARS_INTO_THE_FUTURE
   )
 
   let yearsByDow = sortYearsByDow(futureDowsForDate)
 
   return (
     <div className={cs(classes.root, className)}>
+      <YearsTableDescription
+        className={classes.description}
+        intMonth={intMonth}
+        intDay={intDay}
+      />
       <table className={classes.table}>
         <tbody>
           {Info.weekdays().map(dow => (

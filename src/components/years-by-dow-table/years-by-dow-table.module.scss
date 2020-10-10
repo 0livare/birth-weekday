@@ -3,6 +3,10 @@
 .root {
   overflow-x: scroll;
   width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .table {
@@ -30,4 +34,10 @@
       font-weight: bold;
     }
   }
+}
+
+.description {
+  margin: 2em 0;
+  max-width: 400px;
+  padding: 0 1em;
 }

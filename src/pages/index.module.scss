@@ -18,8 +18,8 @@ $margin: 2em;
   justify-content: center;
   margin: $margin 0;
 
-  > *:not(:last-child) {
-    margin-right: 2em;
+  > * {
+    margin: 0.5em;
   }
 }
 
