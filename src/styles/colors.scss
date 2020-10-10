@@ -1,19 +1,40 @@
-@use 'sass:color';
+@use 'sass:map';
+
+$colors: (
+  'base': (
+    'light': black,
+    'dark': white,
+  ),
+  'primary': (
+    'light': #1565c0,
+    'dark': #f44336,
+  ),
+  'bg': (
+    'light': rgb(241, 241, 241),
+    'dark': rgb(24, 24, 24),
+  ),
+  'gray': (
+    'light': rgba(black, 0.5),
+    'dark': rgba(white, 0.5),
+  ),
+  'gray-light': (
+    'light': rgba(black, 0.25),
+    'dark': rgba(white, 0.25),
+  ),
+  'gray-light-2': (
+    'light': rgba(black, 0.2),
+    'dark': rgba(white, 0.1),
+  ),
+);
 
 :root {
-  --base: $light-base;
-  --primary: #1565c0;
-  --bg: rgb(241, 241, 241);
-  --gray: #{rgba(black, 0.5)};
-  --gray-light: #{rgba(black, 0.25)};
-  --gray-light-2: #{rgba(black, 0.2)};
+  @each $name, $lightDark in $colors {
+    --#{$name}: #{map.get($lightDark, 'light')};
+  }
 }
 
 .dark-theme {
-  --base: white;
-  --primary: #f44336;
-  --bg: rgb(24, 24, 24);
-  --gray: #{rgba(white, 0.5)};
-  --gray-light: #{rgba(white, 0.25)};
-  --gray-light-2: #{rgba(white, 0.1)};
+  @each $name, $lightDark in $colors {
+    --#{$name}: #{map.get($lightDark, 'dark')};
+  }
 }
