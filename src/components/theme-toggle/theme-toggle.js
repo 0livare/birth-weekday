@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useLayoutEffect} from 'react'
 import cs from 'classnames'
 import {useRecoilState} from 'recoil'
 
@@ -9,7 +9,7 @@ import classes from './theme-toggle.module.scss'
 export function ThemeToggle({className, ...rest}) {
   const [isLightTheme, setIsLightTheme] = useRecoilState(isLightThemeState)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isLightTheme) return
 
     let html = document.documentElement
