@@ -4,7 +4,6 @@
   --base: $light-base;
   --primary: #1565c0;
   --bg: rgb(241, 241, 241);
-  --off-bg: #{color.adjust(rgb(241, 241, 241), $lightness: -20%)};
   --gray: #{rgba(black, 0.5)};
   --gray-light: #{rgba(black, 0.25)};
   --gray-light-2: #{rgba(black, 0.2)};
@@ -14,7 +13,6 @@
   --base: white;
   --primary: #f44336;
   --bg: rgb(24, 24, 24);
-  --off-bg: #{color.adjust(rgb(24, 24, 24), $lightness: 10%)};
   --gray: #{rgba(white, 0.5)};
   --gray-light: #{rgba(white, 0.25)};
   --gray-light-2: #{rgba(white, 0.1)};
