@@ -5,28 +5,28 @@ export function SunMoonIcon({showSun, ...rest}) {
   const size = 18
 
   const rotationSpring = useSpring({
-    transform: `rotate(${showSun ? 90 : 40}deg)`,
-    from: {transform: `rotate(${showSun ? 40 : 90}deg)`},
+    from: {transform: `rotate(${90}deg)`},
+    to: {transform: `rotate(${showSun ? 90 : 40}deg)`},
   })
 
   const maskRadiusSpring = useSpring({
-    cx: showSun ? 25 : 10,
-    cy: showSun ? 0 : 2,
     from: {
-      cx: showSun ? 10 : 25,
-      cy: showSun ? 2 : 0,
+      cx: 25,
+      cy: 0,
+    },
+    to: {
+      cx: showSun ? 25 : 10,
+      cy: showSun ? 0 : 2,
     },
   })
 
   const planetRadiusSpring = useSpring({
-    r: showSun ? 8 : 5,
+    from: {r: 5},
     to: {r: showSun ? 5 : 8},
   })
 
   return (
     <animated.svg
-      width='20'
-      height='20'
       viewBox={`0 0 ${size} ${size}`}
       style={rotationSpring}
       {...rest}
@@ -41,8 +41,8 @@ export function SunMoonIcon({showSun, ...rest}) {
         ></animated.circle>
       </mask>
       <animated.circle
-        cx='9'
-        cy='9'
+        cx={size / 2}
+        cy={size / 2}
         fill='currentColor'
         mask='url(#moon-mask)'
         r={planetRadiusSpring.r}
@@ -65,7 +65,7 @@ export function SunMoonIcon({showSun, ...rest}) {
 
 function SunRay({isOpen, theta, size}) {
   const spring = useSpring({
-    from: {transform: 'scale(0)'},
+    from: {transform: 'scale(1)'},
     to: {transform: `scale(${isOpen ? 1 : 0})`},
   })
 
