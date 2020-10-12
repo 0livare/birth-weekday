@@ -5,9 +5,15 @@
   top: 0;
   right: 0;
   margin: 1em;
-  color: goldenrod;
 
-  &.dark {
-    color: theme.$gray;
+  svg {
+    color: goldenrod;
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }

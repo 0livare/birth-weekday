@@ -18,13 +18,12 @@ export function ThemeToggle({className, ...rest}) {
   }, [isLightTheme])
 
   return (
-    <SunMoonIcon
-      {...rest}
-      className={cs(className, classes.themeToggle, {
-        [classes.dark]: !isLightTheme,
-      })}
-      showSun={isLightTheme}
-      onClick={() => setIsLightTheme(light => !light)}
-    />
+    <div className={cs(className, classes.themeToggle)}>
+      <SunMoonIcon
+        {...rest}
+        showSun={isLightTheme}
+        onClick={() => setIsLightTheme(light => !light)}
+      />
+    </div>
   )
 }
