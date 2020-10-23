@@ -23,6 +23,8 @@ export function ThemeToggle({className, ...rest}) {
         {...rest}
         showSun={isLightTheme}
         onClick={() => setIsLightTheme(light => !light)}
+        width='20px'
+        height='20px'
       />
     </div>
   )
